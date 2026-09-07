@@ -1,4 +1,5 @@
 import type { ModelModalities, ModelOperation, ModelOperationMode } from "@cline/shared"
+import { DEFAULT_API_PROVIDER as SDK_DEFAULT_API_PROVIDER } from "@cline/shared"
 import { ApiFormat } from "./proto/cline/models"
 import type { ApiHandlerSettings } from "./storage/state-keys"
 
@@ -52,8 +53,9 @@ export type ApiProvider =
 	| "xiaomi"
 	| "tencent-tokenhub"
 	| "chutes"
+	| "freellmapi"
 
-export const DEFAULT_API_PROVIDER = "openrouter" as ApiProvider
+export const DEFAULT_API_PROVIDER = SDK_DEFAULT_API_PROVIDER as ApiProvider
 
 export interface ApiHandlerOptions extends Partial<ApiHandlerSettings> {
 	ulid?: string // Used to identify the task in API requests

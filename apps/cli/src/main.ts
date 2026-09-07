@@ -15,7 +15,7 @@ import {
 	autoUpdateOnStartup,
 	getPreferredKanbanInstaller,
 } from "./commands/update";
-import { CLI_DEFAULT_CHECKPOINT_CONFIG } from "./runtime/defaults";
+import { CLI_DEFAULT_API_PROVIDER, CLI_DEFAULT_CHECKPOINT_CONFIG, CLI_DEFAULT_MODEL_ID } from "./runtime/defaults";
 import type { TuiStartupTarget } from "./tui/types";
 import { filterChatModels } from "./utils/chat-models";
 import { getCliBuildInfo } from "./utils/common";
@@ -947,7 +947,7 @@ export async function runCli(): Promise<void> {
 				isClinePassEnabled: true,
 			});
 		const provider = normalizeProviderId(
-			args.provider?.trim() || lastUsedProviderSettings?.provider || "cline",
+			args.provider?.trim() || lastUsedProviderSettings?.provider || CLI_DEFAULT_API_PROVIDER,
 		);
 		let selectedProviderSettings =
 			providerSettingsManager.getProviderSettings(provider);
@@ -1056,8 +1056,9 @@ export async function runCli(): Promise<void> {
 			modelId:
 				args.model ??
 				selectedProviderSettings?.model ??
-				knownModelIds[0] ??
-				"anthropic/claude-sonnet-4.6",
+				(provider === CLI_DEFAULT_API_PROVIDER
+					? CLI_DEFAULT_MODEL_ID
+					: knownModelIds[0] ?? "anthropic/claude-sonnet-4.6"),
 			apiKey: apiKey ?? "",
 			knownModels,
 			systemPrompt: await resolveSystemPrompt({

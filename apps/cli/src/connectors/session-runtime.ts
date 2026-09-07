@@ -15,6 +15,10 @@ import {
 } from "../commands/auth";
 import type { CliLoggerAdapter } from "../logging/adapter";
 import { resolveSystemPrompt } from "../runtime/prompt";
+import {
+	CLI_DEFAULT_API_PROVIDER,
+	CLI_DEFAULT_MODEL_ID,
+} from "../runtime/defaults";
 import { resolveCliSessionMetadata } from "../utils/enterprise";
 import { resolveWorkspaceRoot } from "../utils/helpers";
 import {
@@ -68,7 +72,7 @@ export async function buildConnectorStartRequest(input: {
 	const provider = normalizeProviderId(
 		input.options.provider?.trim() ||
 			lastUsedProviderSettings?.provider ||
-			"cline",
+			CLI_DEFAULT_API_PROVIDER,
 	);
 	let selectedProviderSettings =
 		providerSettingsManager.getProviderSettings(provider);
@@ -110,7 +114,9 @@ export async function buildConnectorStartRequest(input: {
 			input.options.model?.trim() ||
 			selectedProviderSettings?.model ||
 			input.defaultModel ||
-			"anthropic/claude-sonnet-4.6",
+			(provider === CLI_DEFAULT_API_PROVIDER
+				? CLI_DEFAULT_MODEL_ID
+				: "anthropic/claude-sonnet-4.6"),
 		mode: input.options.mode,
 		apiKey,
 		systemPrompt,

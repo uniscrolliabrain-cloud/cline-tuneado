@@ -339,7 +339,16 @@ export {
 	stripModeNotices,
 	xmlTagsRemoval,
 } from "./prompt/format";
-export { CLINE_DEFAULT_MODEL_ID } from "./providers/defaults";
+export {
+	CLINE_DEFAULT_MODEL_ID,
+	DEFAULT_API_PROVIDER,
+	FREELLM_API_KEY,
+	FREELLM_BASE_URL,
+	FREELLM_DEFAULT_MODEL_ID,
+	OPENROUTER_API_KEY_ENV,
+	OPENROUTER_BASE_URL,
+	OPENROUTER_FALLBACK_MODEL_ID,
+} from "./providers/defaults";
 export { isClineProvider } from "./providers/utils";
 export {
 	buildRemoteConfigSessionBlobUploadMetadata,

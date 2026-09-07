@@ -877,6 +877,13 @@ function toRuntimeProviderDefaults(
 	);
 }
 
+/**
+ * Provider id que Cline usa por defecto cuando no hay configuración del
+ * usuario (plan y act). Apunta a FreeLLMAPI (local); el SDK cae a OpenRouter
+ * automáticamente si el localhost no responde.
+ */
+export { DEFAULT_API_PROVIDER } from "@cline/shared";
+
 export const OPENAI_COMPATIBLE_PROVIDERS: Record<string, ProviderDefaults> =
 	toRuntimeProviderDefaults(getOpenAICompatibleProviderManifests());
 

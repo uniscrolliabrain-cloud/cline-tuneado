@@ -987,6 +987,7 @@ export {
 export {
 	clearLiveModelsCatalogCache,
 	clearPrivateModelsCatalogCache,
+	DEFAULT_API_PROVIDER,
 	DEFAULT_MODELS_CATALOG_URL,
 	getLiveModelsCatalog,
 	getProviderConfig,
